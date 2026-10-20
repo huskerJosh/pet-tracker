@@ -1,0 +1,7 @@
+"A calendar date formatted YYYY-MM-DD."
+scalar ISODate
+
+schema {
+  query: Query
+  mutation: Mutation
+}

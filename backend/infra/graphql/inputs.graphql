@@ -1,0 +1,46 @@
+input DashboardFilter {
+  search: String
+  species: Species
+  status: PetStatus
+  insurance: InsuranceStatus
+}
+
+input PetInput {
+  name: String!
+  species: Species!
+  breed: String
+  dateOfBirth: ISODate
+  sex: Sex
+  weightKg: Float
+  ownerName: String!
+  notes: String
+}
+
+input MedicalRecordInput {
+  type: RecordType!
+  title: String!
+  date: ISODate!
+  veterinarian: String
+  description: String
+  nextDueDate: ISODate
+}
+
+input SubscriberInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: ISODate!
+  phone: String!
+  address: String!
+  "2-letter US state code; normalised to upper case."
+  state: String!
+  "12345 or 12345-6789."
+  zipCode: String!
+}
+
+input InsurancePolicyInput {
+  planName: String!
+  idNumber: String!
+  effectiveDate: ISODate!
+  expirationDate: ISODate!
+  subscriber: SubscriberInput!
+}

@@ -1,0 +1,13 @@
+type Query {
+  pet(id: ID!): Pet!
+  pets: [Pet!]!
+  dashboardPets(
+    filter: DashboardFilter
+    sort: DashboardSort = name
+    order: SortOrder = asc
+    page: Int = 1
+    limit: Int = 24
+  ): DashboardPage!
+  medicalRecord(id: ID!): MedicalRecord!
+  insurancePolicy(id: ID!): InsurancePolicy!
+}

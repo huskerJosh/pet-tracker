@@ -1,0 +1,19 @@
+{
+  "name": "pets-service",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typescript": "^4.1.2",
+    "@graphql-codegen/typescript-resolvers": "^4.4.1",
+    "@graphql-codegen/typescript-operations": "^4.4.0",
+    "@graphql-codegen/typed-document-node": "^5.0.12",
+    "graphql": "^16.9.0"
+  }
+}

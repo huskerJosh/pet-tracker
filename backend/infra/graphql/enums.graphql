@@ -1,0 +1,7 @@
+enum Species { dog cat bird rabbit reptile other }
+enum Sex { male female unknown }
+enum RecordType { vaccination checkup surgery medication allergy other }
+enum PetStatus { overdue upToDate noRecords }
+enum InsuranceStatus { active expired none }
+enum DashboardSort { name species breed age ownerName recordCount lastVisit nextDue status insurance }
+enum SortOrder { asc desc }

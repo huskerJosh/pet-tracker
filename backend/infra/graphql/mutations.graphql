@@ -1,0 +1,14 @@
+type Mutation {
+  createPet(input: PetInput!): Pet!
+  updatePet(id: ID!, input: PetInput!): Pet!
+  "Also deletes the pet's medical records and insurance policies."
+  deletePet(id: ID!): Boolean!
+
+  createMedicalRecord(petId: ID!, input: MedicalRecordInput!): MedicalRecord!
+  updateMedicalRecord(id: ID!, input: MedicalRecordInput!): MedicalRecord!
+  deleteMedicalRecord(id: ID!): Boolean!
+
+  createInsurancePolicy(petId: ID!, input: InsurancePolicyInput!): InsurancePolicy!
+  updateInsurancePolicy(id: ID!, input: InsurancePolicyInput!): InsurancePolicy!
+  deleteInsurancePolicy(id: ID!): Boolean!
+}

@@ -1,0 +1,46 @@
+fragment PetFields on Pet {
+  id name species breed dateOfBirth sex weightKg ownerName notes
+}
+
+fragment RecordFields on MedicalRecord {
+  id petId type title date veterinarian description nextDueDate
+}
+
+fragment PolicyFields on InsurancePolicy {
+  id petId planName idNumber effectiveDate expirationDate
+  subscriber { firstName lastName dateOfBirth phone address state zipCode }
+}
+
+query Dashboard($filter: DashboardFilter, $sort: DashboardSort, $order: SortOrder, $page: Int) {
+  dashboardPets(filter: $filter, sort: $sort, order: $order, page: $page) {
+    total page limit
+    items {
+      id name species breed dateOfBirth sex weightKg ownerName notes
+      recordCount lastVisit nextDue status insuranceStatus insuranceExpires
+    }
+  }
+}
+
+query GetPet($id: ID!) { pet(id: $id) { ...PetFields } }
+query PetRecords($id: ID!) { pet(id: $id) { id records { ...RecordFields } } }
+query PetInsurance($id: ID!) { pet(id: $id) { id insurance { ...PolicyFields } } }
+
+mutation CreatePet($input: PetInput!) { createPet(input: $input) { ...PetFields } }
+mutation UpdatePet($id: ID!, $input: PetInput!) { updatePet(id: $id, input: $input) { ...PetFields } }
+mutation DeletePet($id: ID!) { deletePet(id: $id) }
+
+mutation CreateRecord($petId: ID!, $input: MedicalRecordInput!) {
+  createMedicalRecord(petId: $petId, input: $input) { ...RecordFields }
+}
+mutation UpdateRecord($id: ID!, $input: MedicalRecordInput!) {
+  updateMedicalRecord(id: $id, input: $input) { ...RecordFields }
+}
+mutation DeleteRecord($id: ID!) { deleteMedicalRecord(id: $id) }
+
+mutation CreatePolicy($petId: ID!, $input: InsurancePolicyInput!) {
+  createInsurancePolicy(petId: $petId, input: $input) { ...PolicyFields }
+}
+mutation UpdatePolicy($id: ID!, $input: InsurancePolicyInput!) {
+  updateInsurancePolicy(id: $id, input: $input) { ...PolicyFields }
+}
+mutation DeletePolicy($id: ID!) { deleteInsurancePolicy(id: $id) }

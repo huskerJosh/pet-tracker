@@ -1,0 +1,31 @@
+overwrite: true
+schema: backend/infra/graphql/*.graphql
+generates:
+  backend/src/models/generated.types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      useTypeImports: true
+      enumsAsTypes: true
+      useIndexSignature: true
+      scalars:
+        ISODate: string
+      contextType: ../helpers/context.js#GraphQLContext
+      mappers:
+        Pet: ./db/index.js#PetModel
+        MedicalRecord: ./db/index.js#RecordModel
+        InsurancePolicy: ./db/index.js#InsuranceModel
+  frontend/src/api/generated.ts:
+    documents: frontend/src/api/operations.graphql
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      enumsAsTypes: true
+      avoidOptionals:
+        field: true
+      skipTypename: true
+      scalars:
+        ISODate: string

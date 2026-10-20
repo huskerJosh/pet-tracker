@@ -1,0 +1,72 @@
+type Pet {
+  id: ID!
+  name: String!
+  species: Species!
+  breed: String!
+  dateOfBirth: ISODate
+  sex: Sex!
+  weightKg: Float
+  ownerName: String!
+  notes: String!
+  records(type: RecordType): [MedicalRecord!]!
+  insurance: [InsurancePolicy!]!
+}
+
+type MedicalRecord {
+  id: ID!
+  petId: ID!
+  pet: Pet!
+  type: RecordType!
+  title: String!
+  date: ISODate!
+  veterinarian: String!
+  description: String!
+  nextDueDate: ISODate
+}
+
+type Subscriber {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: ISODate!
+  phone: String!
+  address: String!
+  state: String!
+  zipCode: String!
+}
+
+type InsurancePolicy {
+  id: ID!
+  petId: ID!
+  pet: Pet!
+  planName: String!
+  idNumber: String!
+  effectiveDate: ISODate!
+  expirationDate: ISODate!
+  subscriber: Subscriber!
+}
+
+"A pet with the summary fields shown in the dashboard table."
+type DashboardPet {
+  id: ID!
+  name: String!
+  species: Species!
+  breed: String!
+  dateOfBirth: ISODate
+  sex: Sex!
+  weightKg: Float
+  ownerName: String!
+  notes: String!
+  recordCount: Int!
+  lastVisit: ISODate
+  nextDue: ISODate
+  status: PetStatus!
+  insuranceStatus: InsuranceStatus!
+  insuranceExpires: ISODate
+}
+
+type DashboardPage {
+  items: [DashboardPet!]!
+  total: Int!
+  page: Int!
+  limit: Int!
+}
