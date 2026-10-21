@@ -13,8 +13,17 @@ interface Props {
 }
 
 export default function RecordForm({ initial, onSubmit, onCancel, pending, error }: Props) {
-  const [v, setV] = useState<RecordInput>(
-    initial ?? { type: 'checkup', title: '', date: today(), veterinarian: '', description: '', nextDueDate: null },
+  const [v, setV] = useState<RecordInput>(() =>
+    initial
+      ? {
+          type: initial.type,
+          title: initial.title,
+          date: initial.date,
+          veterinarian: initial.veterinarian ?? '',
+          description: initial.description ?? '',
+          nextDueDate: initial.nextDueDate ?? null,
+        }
+      : { type: 'checkup', title: '', date: today(), veterinarian: '', description: '', nextDueDate: null },
   );
   const set = <K extends keyof RecordInput>(k: K, val: RecordInput[K]) => setV((p) => ({ ...p, [k]: val }));
   const submit = (e: FormEvent) => {

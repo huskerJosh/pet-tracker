@@ -15,7 +15,14 @@ interface Props {
 }
 
 export default function PetForm({ initial, onSubmit, onCancel, pending, error }: Props) {
-  const [v, setV] = useState<PetInput>(initial ? { ...EMPTY, ...initial } : EMPTY);
+  const [v, setV] = useState<PetInput>(() => {
+    if (!initial) return EMPTY;
+    const { name, species, breed, dateOfBirth, sex, weightKg, ownerName, notes } = initial;
+    return {
+      name, species, breed: breed ?? '', dateOfBirth: dateOfBirth ?? null, sex,
+      weightKg: weightKg ?? null, ownerName: ownerName ?? '', notes: notes ?? '',
+    };
+  });
   const set = <K extends keyof PetInput>(k: K, val: PetInput[K]) => setV((p) => ({ ...p, [k]: val }));
 
   const submit = (e: FormEvent) => {

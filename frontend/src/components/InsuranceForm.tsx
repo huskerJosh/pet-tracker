@@ -15,7 +15,17 @@ interface Props {
 }
 
 export default function InsuranceForm({ initial, onSubmit, onCancel, pending, error }: Props) {
-  const [v, setV] = useState<InsuranceInput>(initial ?? EMPTY);
+  const [v, setV] = useState<InsuranceInput>(() => {
+    if (!initial) return EMPTY;
+    const { planName, idNumber, effectiveDate, expirationDate, subscriber: s } = initial;
+    return {
+      planName, idNumber, effectiveDate, expirationDate,
+      subscriber: {
+        firstName: s.firstName, lastName: s.lastName, dateOfBirth: s.dateOfBirth,
+        phone: s.phone, address: s.address, state: s.state, zipCode: s.zipCode,
+      },
+    };
+  });
   const [localError, setLocalError] = useState<string | null>(null);
   const set = <K extends keyof InsuranceInput>(k: K, val: InsuranceInput[K]) => setV((p) => ({ ...p, [k]: val }));
   const setSub = <K extends keyof Subscriber>(k: K, val: string) =>
