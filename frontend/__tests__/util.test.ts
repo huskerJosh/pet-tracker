@@ -1,4 +1,4 @@
-import { ageLabel } from './util';
+import { ageLabel } from '../src/util';
 
 describe('ageLabel', () => {
   const now = new Date('2025-06-15');

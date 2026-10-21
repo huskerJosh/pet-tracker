@@ -3,7 +3,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, vi } from 'vitest';
-import Dashboard from './pages/Dashboard';
+import Dashboard from '../src/pages/Dashboard';
 
 const pet = {
   id: '1', name: 'Biscuit', species: 'dog', breed: 'Lab', ownerName: 'Alex', dateOfBirth: null, sex: 'male',

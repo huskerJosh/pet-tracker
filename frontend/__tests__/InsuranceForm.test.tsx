@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import InsuranceForm from './components/InsuranceForm';
-import { policyState } from './util';
+import InsuranceForm from '../src/components/InsuranceForm';
+import { policyState } from '../src/util';
 
 const fill = async () => {
   const t = (l: string, v: string) => userEvent.type(screen.getByLabelText(l), v);
